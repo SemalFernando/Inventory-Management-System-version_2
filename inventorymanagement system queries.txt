@@ -1,0 +1,32 @@
+CREATE DATABASE InventoryManagement;
+USE InventoryManagement;
+
+
+
+CREATE TABLE Customer (
+    CustomerID INT PRIMARY KEY AUTO_INCREMENT,
+    CustomerName VARCHAR(100) NOT NULL,
+    ContactNumber VARCHAR(15),
+    Email VARCHAR(100),
+    Address VARCHAR(100)
+);
+
+
+CREATE TABLE Product (
+    ProductID INT PRIMARY KEY AUTO_INCREMENT,
+    ProductName VARCHAR(100) NOT NULL,
+    UnitPrice float NOT NULL,
+    Stock INT DEFAULT 0
+);
+
+
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY AUTO_INCREMENT,
+    CustomerID INT NOT NULL,
+    ProductID INT NOT NULL,
+    Quantity INT NOT NULL,
+    TotalValue DECIMAL(10, 2),
+    OrderDate DATE DEFAULT (CURRENT_DATE),
+    FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID) ON DELETE CASCADE,
+    FOREIGN KEY (ProductID) REFERENCES Product(ProductID) ON DELETE CASCADE
+);
